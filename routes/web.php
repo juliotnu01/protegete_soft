@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProyectoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,6 +16,7 @@ use Inertia\Inertia;
 |
 */
 
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -23,7 +25,16 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/proyecto', function () {
+    return Inertia::render('Proyecto');
+})->name('proyecto');
+Route::middleware(['auth:sanctum', 'verified'])->get('/historia', function () {
+    return Inertia::render('Historia');
+})->name('historia');
+Route::middleware(['auth:sanctum', 'verified'])->get('/configurar-proyecto/{proyecto?}', function () {
+    return Inertia::render('ConfiguracionProyecto');
+})->name('configurar.proyecto');
